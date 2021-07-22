@@ -7,7 +7,6 @@ const WorkOrderDetails = ({ details }) => {
   return (
     <Fragment>
       <Responsive displayIn={["Laptop", "IPadPro"]}>
-        {" "}
         <tr>
           <th className={classes.fixed} scope="row">
             {details.name}
@@ -43,7 +42,6 @@ const WorkOrderDetails = ({ details }) => {
           <tr>
             <th colspan="2">Submited by</th>
           </tr>
-          
           <div colspan="2" className={classes["worker-details"]}>
             <img src={details.image}></img>
             <ul>
@@ -53,15 +51,6 @@ const WorkOrderDetails = ({ details }) => {
             </ul>
           </div>
         </Section>
-
-        {/* <tr></tr>
-        <tr>
-         
-        </tr>
-        <tr>
-         
-        </tr>
-         */}
       </Responsive>
     </Fragment>
   );

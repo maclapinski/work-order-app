@@ -2,21 +2,21 @@ import React from "react";
 import classes from "./SearchBar.module.css";
 import SearchIcon from "@material-ui/icons/Search";
 
-const SearchBar = ({onChange}) => {
- 
+const SearchBar = ({ onChange }) => {
   const inputChangeHandler = (event) => {
-    onChange(event.target.value)
+    onChange(event.target.value);
   };
-
-    return(<form className={classes["form-inline"]}>
+  return (
+    <form className={classes["form-inline"]}>
       <SearchIcon className={classes.icon} />
-        <input
-          onChange={inputChangeHandler}
-          className={classes["form-control"]}
-          type="search"
-          placeholder="Filter by worker name..."
-          aria-label="Filter by worker name"
-        />
-      </form>)
-}
+      <input
+        onChange={inputChangeHandler}
+        className={classes["form-control"]}
+        type="search"
+        placeholder="Filter by worker name..."
+        aria-label="Filter by worker name"
+      />
+    </form>
+  );
+};
 export default SearchBar;
