@@ -1,107 +1,134 @@
 import React, { useEffect, useState } from "react";
-import List from "./components/List";
-
 import useHttp from "./hooks/use-http";
+import Filter from "./components/Filter";
+import Table from "./components/Table";
+import Section from "./UI/Section";
+import classes from "./App.module.css"
 
 function App() {
   const [workOrders, setWorkOrders] = useState([]);
+  const [workOrdersBySearch, setWorkOrdersBySearch] = useState([]);
   const [workerIdList, setWorkerIdList] = useState([]);
-  const [workOrdersLoaded, setWorkOrdersLoaded] = useState([]);
+  const [workOrdersLoaded, setWorkOrdersLoaded] = useState(false);
+  const [listOrder, setListOrder] = useState("asc");
 
-  const { isLoading, error, sendRequest: fetchWorkOrders } = useHttp();
+  const { isLoading, error, sendRequest } = useHttp();
 
-  console.log("App Running");
+  const orderRadioOptions = [
+    { value: "asc", label: "Earliest first" },
+    { value: "dsc", label: "Latest first" },
+  ];
+
+  const listOrderChangeHandler = (value) => {
+    setListOrder(value);
+  };
+
+  const searchTermChangeHandler = (value) => {
+    const loadedWorkOrders = [...workOrders];
+    function filterByWorkerName(item) {
+      if (item.workerName.toLowerCase().includes(value.toLowerCase())) {
+        return true;
+      }
+      return false;
+    }
+
+    if (value !== "") {
+      setWorkOrdersBySearch(loadedWorkOrders.filter(filterByWorkerName));
+    } else {
+      setWorkOrdersBySearch(loadedWorkOrders);
+    }
+  };
 
   useEffect(() => {
     const transformWorkOrders = ({ orders }) => {
       const loadedWorkOrders = [];
-      const workOrdersWithWorkers = [];
       const workerIds = [];
-      const workOrdersLoaded = false;
 
       for (const item in orders) {
         const utcSeconds = orders[item].deadline;
         const deadline = new Date(0);
         deadline.setUTCSeconds(utcSeconds);
-
         const deadlineString = deadline.toLocaleString();
+
         loadedWorkOrders.push({
           id: orders[item].id,
           name: orders[item].name,
           description: orders[item].description,
           deadline: deadlineString,
           workerId: orders[item].workerId,
-          companyName: "",
-          workerName: "",
-          email: "",
-          image: "",
         });
 
         if (!workerIds.includes(orders[item].workerId)) {
           workerIds.push(orders[item].workerId);
         }
       }
-      console.log(workerIds + 'work order Ids from first effect');
+
+      loadedWorkOrders.sort(
+        (a, b) => parseInt(a.deadline) - parseInt(b.deadline)
+      );
+
       setWorkerIdList(workerIds);
       setWorkOrders(loadedWorkOrders);
       setWorkOrdersLoaded(true);
-
     };
 
-    fetchWorkOrders(
+    sendRequest(
       { url: "https://api.hatchways.io/assessment/work_orders" },
       transformWorkOrders
     );
-  }, [fetchWorkOrders]);
+  }, [sendRequest]);
 
   useEffect(() => {
-    console.log("useEffect 2 running");
-    if (workOrders.length === 0) {
-      console.log("nothing to process");
-    }
     const transformWorkerData = ({ worker }) => {
       const loadedWorkOrders = [...workOrders];
-      console.log(worker);
+
       for (const item in loadedWorkOrders) {
-        console.log(loadedWorkOrders[item].workerId + "and" + worker.id);
         if (loadedWorkOrders[item].workerId === worker.id) {
-          console.log("found match");
           loadedWorkOrders[item].companyName = worker.companyName;
-          loadedWorkOrders[item].name = worker.name;
+          loadedWorkOrders[item].workerName = worker.name;
           loadedWorkOrders[item].email = worker.email;
-          loadedWorkOrders[item].image= worker.image;
+          loadedWorkOrders[item].image = worker.image;
         }
       }
-      // loadedWorkOrders.forEach((workOrder) => {
-
-      //   if (loadedWorkOrders[workOrder].workerId === workerData.id) {
-      //     console.log('found pair');
-      //     loadedWorkOrders[workOrder].companyName = workerData.companyName;
-      //   }
-      // });
       setWorkOrders(loadedWorkOrders);
-      if(workOrders[1].companyName === '') { console.log('set work orders from effect 2')}
+      setWorkOrdersBySearch(loadedWorkOrders);
     };
     if (workerIdList.length > 0) {
       workerIdList.forEach((id) => {
-        console.log(id);
-        fetchWorkOrders(
+        sendRequest(
           { url: "https://api.hatchways.io/assessment/workers/" + id },
           transformWorkerData
         );
       });
     }
-  }, [workOrdersLoaded, fetchWorkOrders]);
+  }, [workOrdersLoaded, sendRequest]);
 
   return (
-    <React.Fragment>
-      <List
-        items={workOrders}
-        loading={isLoading}
-        error={error}
-        onFetch={fetchWorkOrders}
+    <div className={classes.body}>
+      <Filter
+        onSearchTermChange={searchTermChangeHandler}
+        onOrderChange={listOrderChangeHandler}
+        options={orderRadioOptions}
       />
-    </React.Fragment>
+      {!isLoading && !error && (
+        <Table
+          items={workOrdersBySearch}
+          order={listOrder}
+          loading={isLoading}
+          error={error}
+        />
+      )}
+      {error && (
+        <Section>
+          <h2>{error}</h2>
+        </Section>
+      )}
+      {isLoading && (
+        <Section>
+          <h2>Loading work orders...</h2>
+        </Section>
+      )}{" "}
+    </div>
   );
 }
 

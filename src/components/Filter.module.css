@@ -1,0 +1,24 @@
+.row{
+    display: flex;
+    align-items: center;
+    color: #121212;
+    margin: 0 20px;
+}
+.row p {
+    font-weight: 500;
+    margin-bottom: auto;
+    margin-right: 20px;
+    margin-top: 11px;
+}
+@media only screen and (min-width: 992px) {
+    .row{
+        display: flex;
+        align-items: center;
+        color: #121212;
+        margin: 0 20px 10px; 
+    }
+    .row p {
+        font-weight: 500;
+        margin-right: 20px;
+    }
+  }

@@ -1,0 +1,57 @@
+
+.form-inline .form-control {
+    display: inline-block;
+    vertical-align: middle;
+}
+.form-inline svg {
+    position: absolute;
+    padding-left: 0.5rem;
+}
+.form-control:focus-visible {
+    outline: #646b71 auto 1px;
+}
+.form-inline {
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    -ms-flex-align: center;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    padding: 10px 20px 5px;
+}
+.form-control {
+    display: block;
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 2px solid #ced4da;
+    border-radius: .5rem;
+    color: #495057;
+    font-size: 1rem;
+    font-weight: 400;
+    height: calc(1.5em + .75rem + 2px);
+    line-height: 1.5;
+    margin: auto;
+    padding: .375rem .75rem;
+    padding-left: 2.5rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    width: 100%;
+}
+.form-inline [type=search] {
+    -webkit-appearance: none;
+    outline-offset: -2px;
+}
+.form-inline button, input {
+    overflow: visible;
+}
+.form-inline button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+}
+
+@media only screen and (min-width: 992px) {
+    .form-inline {
+        padding: 30px 20px 5px;
+    }
+  }
