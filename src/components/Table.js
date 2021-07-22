@@ -38,34 +38,25 @@ const Table = (props) => {
   if (props.error) {
     content = <button onClick={props.onFetch}>Try again</button>;
   }
-
-  if (props.items.length === 0 && !props.loading) {
-    return (
-      <Section>
-        <h2>No work orders found.</h2>
-      </Section>
-    );
-  } else {
-    return (
-      <React.Fragment>
-        <div className={classes.container}>
-          <table>
-            <Responsive displayIn={["Laptop", "IPadPro"]}>
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Deadline</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Submitted by</th>
-                </tr>
-              </thead>
-            </Responsive>
-            {content}
-          </table>
-        </div>
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      <div className={classes.container}>
+        <table>
+          <Responsive displayIn={["Laptop", "IPadPro"]}>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Deadline</th>
+                <th scope="col">Description</th>
+                <th scope="col">Submitted by</th>
+              </tr>
+            </thead>
+          </Responsive>
+          {content}
+        </table>
+      </div>
+    </React.Fragment>
+  );
 };
 
 export default Table;

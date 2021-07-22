@@ -3,7 +3,7 @@ import useHttp from "./hooks/use-http";
 import Filter from "./components/Filter";
 import Table from "./components/Table";
 import Section from "./UI/Section";
-import classes from "./App.module.css"
+import classes from "./App.module.css";
 
 function App() {
   const [workOrders, setWorkOrders] = useState([]);
@@ -110,7 +110,7 @@ function App() {
         onOrderChange={listOrderChangeHandler}
         options={orderRadioOptions}
       />
-      {!isLoading && !error && (
+      {!isLoading && !error && workOrdersBySearch.length !== 0 && (
         <Table
           items={workOrdersBySearch}
           order={listOrder}
@@ -127,7 +127,12 @@ function App() {
         <Section>
           <h2>Loading work orders...</h2>
         </Section>
-      )}{" "}
+      )}
+      {!isLoading && workOrdersBySearch.length === 0 && (
+        <Section>
+          <h2>No work orders found.</h2>
+        </Section>
+      )}
     </div>
   );
 }

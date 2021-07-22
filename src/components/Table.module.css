@@ -4,8 +4,8 @@
 }
 .row {
   display: flex;
-  align-items: center;
   flex-direction: row !important;
+  align-items: center;
 
   margin: 10px 0;
   padding: 3px;
@@ -20,12 +20,21 @@
   padding: 20px;
 }
 .tbody th {
+  background-color: white;
   margin-left: 15px;
   padding: 5px 20px;
   text-align: left;
 }
-.tbody td {
+.tbody td { background-color: white;
   padding: 5px 20px;
+}
+.tbody td:last-child,
+th:last-child {
+  border-radius: 0 10px 10px 0;
+}
+.tbody td:first-child,
+th:first-child {
+  border-radius: 10px 0 0 10px;
 }
 .container th {
   padding-left: 20px;
@@ -51,9 +60,6 @@
   }
   .container th {
     padding-left: 15px;
-  }
-  .tbody {
-    background: white;
   }
   .tbody tr {
     border-radius: 12px;
