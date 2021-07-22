@@ -6,7 +6,6 @@ import { Responsive } from "./Responsive";
 
 const Table = (props) => {
   let workOrderList = "";
-  const headers = ["ID", "Deadline", "Description", "Submitted by"]
   if (props.items.length > 0) {
     if (props.order === "asc") {
       workOrderList = (
@@ -51,15 +50,16 @@ const Table = (props) => {
       <React.Fragment>
         <div className={classes.container}>
           <table>
-            <Responsive displayIn={["Laptop", "IPadPro"]}>            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Deadline</th>
-                <th scope="col">Description</th>
-                <th scope="col">Submitted by</th>
-              </tr>
-            </thead></Responsive>
-
+            <Responsive displayIn={["Laptop", "IPadPro"]}>
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Deadline</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Submitted by</th>
+                </tr>
+              </thead>
+            </Responsive>
             {content}
           </table>
         </div>
