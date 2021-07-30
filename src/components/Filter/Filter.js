@@ -1,7 +1,7 @@
 import React from "react";
-import RadioButtonsGroup from "./RadioButtonsGroup";
-import SearchBar from "./SearchBar";
-import Section from "../UI/Section";
+import RadioButtonsGroup from "../RadioButtons/RadioButtonsGroup";
+import SearchBar from "../SearchBar/SearchBar";
+import Section from "../Section/Section";
 import classes from "./Filter.module.css";
 
 const Filter = (props) => {
@@ -13,6 +13,7 @@ const Filter = (props) => {
         <RadioButtonsGroup
           onOrderChange={props.onOrderChange}
           options={props.options}
+          value={props.value}
         />
       </div>
     </Section>

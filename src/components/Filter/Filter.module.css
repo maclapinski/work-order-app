@@ -1,0 +1,12 @@
+.row {
+  display: flex;
+  align-items: center;
+  color: #121212;
+  margin: 0 20px;
+}
+.row p {
+  font-weight: 500;
+  margin-bottom: auto;
+  margin-right: 20px;
+  margin-top: 13px;
+}

@@ -17,7 +17,7 @@
     -ms-flex-align: center;
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
-    padding: 10px 20px 5px;
+    padding: 10px 20px;
 }
 .form-control {
     display: block;
@@ -26,7 +26,7 @@
     border: 2px solid #ced4da;
     border-radius: .5rem;
     color: #495057;
-    font-size: 1rem;
+    font-size: inherit;
     font-weight: 400;
     height: calc(1.5em + .75rem + 2px);
     line-height: 1.5;
@@ -52,6 +52,6 @@
 
 @media only screen and (min-width: 992px) {
     .form-inline {
-        padding: 30px 20px 5px;
+        padding: 10px 20px;
     }
   }

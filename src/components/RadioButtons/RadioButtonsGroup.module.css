@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  flex-direction: row !important;
+}
+.buttonRoot,
+.buttonLabel {
+  font-size: 1rem !important;
+  font-family: "Roboto", sans-serif !important;
+}
+
+@media only screen and (max-width: 992px) {
+  .buttonRoot,
+  .buttonLabel {
+    font-size: 0.875rem !important;
+    font-family: "Roboto", sans-serif !important;
+  }
+}

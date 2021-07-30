@@ -7,11 +7,12 @@ const SearchBar = ({ onChange }) => {
     onChange(event.target.value);
   };
   return (
-    <form className={classes["form-inline"]}>
+    <form action="." className={classes["form-inline"]}>
       <SearchIcon className={classes.icon} />
       <input
         onChange={inputChangeHandler}
         className={classes["form-control"]}
+        name="search"
         type="search"
         placeholder="Filter by worker name..."
         aria-label="Filter by worker name"
