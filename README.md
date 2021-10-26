@@ -1,6 +1,9 @@
-# Getting Started with Create React App
+# Work Order app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Application created for a coding challange. App's purpose is to
+render and filter work orders fetched from an API.
+
+[Application preview](https://work-order-app.netlify.app/).
 
 ## Available Scripts
 
